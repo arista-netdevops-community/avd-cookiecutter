@@ -1,0 +1,8 @@
+Hostname, Type, Management IP, Platform
+spine1, spine, 192.168.122.10/24, vEOS
+spine2, spine, 192.168.122.11/24, vEOS
+leaf1, l3leaf, 192.168.122.12/24, vEOS
+leaf2, l3leaf, 192.168.122.13/24, vEOS
+leaf3, l3leaf, 192.168.122.14/24, vEOS
+leaf4, l3leaf, 192.168.122.15/24, vEOS
+cv_atd1, cvp, 192.168.0.5/24, VM
