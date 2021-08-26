@@ -45,5 +45,9 @@ if __name__ == "__main__":
     cabling_plan_list = [ row for row in read_csv_file('CSVs/cabling_plan.csv') ]
     # load general parameters
     general_parameters_dict = read_yaml_file('CSVs/general_parameters.yml')
+    # load server connections
+    server_list = [ row for row in read_csv_file('CSVs/servers.csv') ]
+
+    print(server_list)
 
     # cookiecutter(cookiecutter_template_directory, no_input=True, overwrite_if_exists=True, output_dir=cookiecutter_output_dir)
