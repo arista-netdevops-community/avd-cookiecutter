@@ -1,4 +1,9 @@
 {
     "python.pythonPath": ".venv/bin/python3",
-    "python.languageServer": "Pylance"
+    "python.languageServer": "Pylance",
+    "cSpell.words": [
+        "CSVs",
+        "svis",
+        "vrfs"
+    ]
 }
