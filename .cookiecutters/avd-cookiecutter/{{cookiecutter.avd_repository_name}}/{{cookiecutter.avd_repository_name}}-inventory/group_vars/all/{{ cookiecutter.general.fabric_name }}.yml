@@ -1,0 +1,117 @@
+# L3LS Fabric Values - update these values with caution,
+# SOME CHANGES COULD BE DISRUPTIVE.
+
+fabric_name: {{ cookiecutter.general.fabric_name }}
+
+underlay_routing_protocol: {{ cookiecutter.general.underlay_routing_protocol }}
+
+# Point to Point Network Summary range, assigned as /31 for each
+# uplink interfaces
+# Assign range larger then total [Spines * total potential leafs * 2]
+underlay_p2p_network_summary: {{ cookiecutter.general.underlay_p2p_network_summary }}
+
+# IP address range for evpn loopback for all switches in fabric,
+# assigned as /32s
+# Assign range larger then total Spines + total leafs switches
+overlay_loopback_network_summary: {{ cookiecutter.general.overlay_loopback_network_summary }}
+
+# VTEP VXLAN Tunnel source loopback IP for leaf switches, assigned in /32s
+# Assign range larger then total leaf switches
+vtep_loopback_network_summary: {{ cookiecutter.general.vtep_loopback_network_summary }}
+
+# Enable vlan aware bundles
+vxlan_vlan_aware_bundles: true
+
+# bgp peer groups passwords
+bgp_peer_groups:
+  IPv4_UNDERLAY_PEERS:
+    password: {{ cookiecutter.general.bgp_peering_password }}
+  EVPN_OVERLAY_PEERS:
+    password: {{ cookiecutter.general.bgp_peering_password }}
+
+# Spine Switches
+spine:
+  platform: 7260CX3-64
+  bgp_as: {{ cookiecutter.general.spine_bgp_asn }}
+  # defines the range of acceptable remote ASNs from leaf switches
+  leaf_as_range: {{ cookiecutter.general.leaf_as_range }}
+  nodes:
+{% set ns = namespace() %}
+{% set ns.switch_id = 0 %}
+{% for a_switch in cookiecutter.csv.inventory -%}
+{%     if a_switch.type == 'spine' %}
+{% set ns.switch_id = ns.switch_id + 1  %}
+    {{ a_switch.hostname }}:
+      id: {{ ns.switch_id }}
+      mgmt_ip: {{ a_switch.management_ip }}
+{%     endif %}
+{%- endfor %}
+
+# Leaf switch groups
+# A maximum of two nodes can form a leaf group
+# When two nodes are in a leaf group this will automatically form mlag pair
+
+l3leaf:
+  defaults:
+    # virtual router mac for VNIs assigned to Leaf switches
+    # format: xx:xx:xx:xx:xx:xx
+    virtual_router_mac_address: 00:1c:73:00:dc:01
+    platform: 7050SX-64
+    # bgp_as: 65100
+    spines: [SPINE-2]
+    uplink_to_spine_interfaces: [Ethernet49/1]
+    # mlag_interfaces: [Ethernet1]
+    spanning_tree_priority: 4096
+    spanning_tree_mode: mstp
+  node_groups:
+    pod1:
+      bgp_as: 65001
+      nodes:
+        Leaf-1:
+          id: 1
+          mgmt_ip: 10.31.72.201/24
+          spine_interfaces: [Ethernet1/1]
+    pod2:
+      bgp_as: 65002
+      nodes:
+        Leaf-2:
+          id: 2
+          mgmt_ip: 10.31.72.202/24
+          spine_interfaces: [Ethernet2/1]
+    pod3:
+      bgp_as: 65003
+      nodes:
+        Leaf-3:
+          id: 3
+          mgmt_ip: 10.31.72.203/24
+          spine_interfaces: [Ethernet3/1]
+    pod4:
+      bgp_as: 65004
+      nodes:
+        Leaf-4:
+          id: 4
+          mgmt_ip: 10.31.72.204/24
+          spine_interfaces: [Ethernet4/1]
+
+spine_bgp_defaults:
+  - update wait-for-convergence
+  - update wait-install
+  - no bgp default ipv4-unicast
+  - distance bgp 20 200 200
+  - graceful-restart restart-time 300
+  - graceful-restart
+
+leaf_bgp_defaults:
+  - update wait-install
+  - no bgp default ipv4-unicast
+  - distance bgp 20 200 200
+  - graceful-restart restart-time 300
+  - graceful-restart
+
+p2p_uplinks_mtu: 9200
+
+# Adjust default bfd values
+bfd_multihop:
+  interval: 1200
+  min_rx: 1200
+  multiplier: 3

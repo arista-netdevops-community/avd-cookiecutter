@@ -71,6 +71,9 @@ if __name__ == "__main__":
 
     # load general parameters and update cookiecutter.json
     cookiecutter_json.update(read_yaml_file('CSVs/general_parameters.yml'))
+    cookiecutter_json.update({
+        'general': read_yaml_file('CSVs/general_parameters.yml')
+    })
 
     # write cookiecutter.json
     cookiecutter_json_filename = os.path.join(
