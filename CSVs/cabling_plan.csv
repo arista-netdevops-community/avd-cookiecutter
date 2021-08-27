@@ -1,4 +1,4 @@
-Local Switch,Local Interface,Remote Switch,Remote Interface,Notes/Comments
+local_switch,local_interface,remote_switch,remote_interface,notes_and_comments
 leaf1,Ethernet2,spine1,Ethernet2
 leaf1,Ethernet3,spine2,Ethernet2
 leaf2,Ethernet2,spine1,Ethernet3

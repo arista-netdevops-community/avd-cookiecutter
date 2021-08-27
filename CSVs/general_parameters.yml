@@ -4,58 +4,59 @@
 avd_repository_name: my_lab_avd
 # Management parameters
 # OOB management gateway address
-Management Gateway: 192.168.122.1
+management_gateway: 192.168.122.1
 # DNS server list
-DNS Servers: [ 8.8.8.8, 192.168.122.1 ]
+dns_server_list: [ 8.8.8.8, 192.168.122.1 ]
 # DNS domain name
-DNS Domain Name: lab.net
+dns_domain_name: lab.net
 # NTP server list
-NTP Servers: [ 216.239.35.0, 216.239.35.4, 216.239.35.8 ]
+ntp_server_list: [ 216.239.35.0, 216.239.35.4, 216.239.35.8 ]
 # AAA server list
-AAA Servers: [ 192.168.0.1 ]
+aaa_server_list: [ 192.168.0.1 ]
 # Key list for every AAA server, type-7 encrypted
-AAA Keys: [ "0207165218120E" ]
+aaa_key_list: [ "0207165218120E" ]
 # Type of AAA server: RADIUS or TACACS
-AAA Server Type: RADIUS
+aaa_server_type: RADIUS
 # CVP ingest key, use empty string if key is not defined
-CVP Ingest Key: atd-lab
+cvp_ingest_key: atd-lab
 # CVP cluster nodes
 cvp_shared_ip: 192.168.0.5
 cvp_username: cvpadmin
 cvp_password: arista123
-CVP Nodes: [ 192.168.0.1, 192.168.0.2, 192.168.0.3 ]
+cvp_cluster_node_list: [ 192.168.0.1, 192.168.0.2, 192.168.0.3 ]
 
 # Fabric Parameters
 # leaf-spine fabric name
 fabric_name: AVD_FABRIC
 # IP address pool for /31 p2p underlay links
 # Assign range larger then total [Spines * total potential leafs * 2]
-Underlay Network Summary: 172.31.255.0/24
+underlay_p2p_network_summary: 172.31.255.0/24
 # IP address range for /32 evpn Loopbacks
 # Assign range larger then total Spines + total leafs switches
-Overlay Network Summary: 192.0.255.0/24
+overlay_loopback_network_summary: 192.0.255.0/24
 # VTEP VXLAN Tunnel source loopback IP for leaf switches, assigned in /32s
 # Assign range larger then total leaf switches
-VTEP Loopback Network Summary: 192.0.254.0/24
+vtep_loopback_network_summary: 192.0.254.0/24
 # MLAG IP pools
 # Assign range larger then total Spines + total leafs switches
 # MLAG L3 peering VLAN 4093
-MLAG L3 Peering Summary: 10.255.251.0/24
+mlag_l3_peering_summary: 10.255.251.0/24
 # MLAG peering VLAN 4094
-MLAG Peering Summary: 10.255.252.0/24
+mlag_peering_summary: 10.255.252.0/24
 
 # Underlay routing protocol parameters
-Underlay Routing Protocol: BGP
-Spine BGP ASN: 65001
-L3leaf BGP AS Range: 65101-65132
-BGP Peering Password, Type-7 Encrypted: "AQQvKeimxJu+uGQ/yYvv9w=="
+underlay_routing_protocol : BGP
+spine_bgp_asn: 65001
+leaf_as_range: 65101-65132
+# BGP peering password, type-7 encrypted
+bgp_peering_password: "AQQvKeimxJu+uGQ/yYvv9w=="
 
 # L3leaf Defaults
-VARP Virtual Router MAC Address: 00:1c:73:00:dc:01
-L3leaf STP Priority: 4096
-L3leaf STP Mode: mstp
+virtual_router_mac_address: 00:1c:73:00:dc:01
+l3leaf_stp_priority: 4096
+l3leaf_stp_mode: mstp
 # Use 1500 for vEOS, 9200 for hardware platforms
-Underlay p2p Link MTU: 1500
+underlay_p2p_link_mtu: 1500
 
 # Local Users
 local_users:
@@ -65,4 +66,4 @@ local_users:
     sha512_password: "$6$Dzu11L7yp9j3nCM9$FSptxMPyIL555OMO.ldnjDXgwZmrfMYwHSr0uznE5Qoqvd9a6UdjiFcJUhGLtvXVZR1r.A/iF5aAt50hf/EK4/"
 
 # Enable vlan aware bundles
-Enable VXLAN Aware Bundles: True
+vxlan_vlan_aware_bundles: True
