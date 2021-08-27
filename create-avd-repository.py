@@ -68,9 +68,13 @@ if __name__ == "__main__":
 
     # start building cookiecutter.json
     cookiecutter_json = dict()
-
+    # set AVD repository name
     cookiecutter_json.update({
         'avd_repository_name': general_parameters_dict['AVD Repository Name']
+    })
+    # set AVD fabric name
+    cookiecutter_json.update({
+        'fabric_name': general_parameters_dict['Fabric Name']
     })
 
     # write cookiecutter.json
@@ -84,4 +88,4 @@ if __name__ == "__main__":
         
     )
 
-    # cookiecutter(cookiecutter_template_directory, no_input=True, overwrite_if_exists=True, output_dir=cookiecutter_output_dir)
+    cookiecutter(cookiecutter_template_directory, no_input=True, overwrite_if_exists=True, output_dir=cookiecutter_output_dir)

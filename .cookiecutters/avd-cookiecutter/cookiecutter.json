@@ -1,3 +1,5 @@
 {
-    "avd_repository_name": "my_lab_avd"
+    "avd_repository_name": "my_lab_avd",
+    "fabric_name": "AVD_FABRIC",
+    "test var": "test string"
 }

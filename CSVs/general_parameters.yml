@@ -25,7 +25,7 @@ CVP Nodes: [ 192.168.0.1, 192.168.0.2, 192.168.0.3 ]
 
 # Fabric Parameters
 # leaf-spine fabric name
-Fabric Name: ATD_FABRIC
+Fabric Name: AVD_FABRIC
 # IP address pool for /31 p2p underlay links
 # Assign range larger then total [Spines * total potential leafs * 2]
 Underlay Network Summary: 172.31.255.0/24

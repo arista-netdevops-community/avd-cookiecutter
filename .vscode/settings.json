@@ -3,6 +3,8 @@
     "python.languageServer": "Pylance",
     "cSpell.words": [
         "CSVs",
+        "VXLAN",
+        "cookiecutter",
         "svis",
         "vrfs"
     ]
