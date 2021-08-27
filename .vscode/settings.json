@@ -5,6 +5,7 @@
         "CSVs",
         "VXLAN",
         "cookiecutter",
+        "mgmt",
         "svis",
         "vrfs"
     ]

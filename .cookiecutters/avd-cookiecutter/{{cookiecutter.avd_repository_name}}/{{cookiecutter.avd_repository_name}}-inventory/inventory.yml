@@ -1,0 +1,45 @@
+---
+all:
+  children:
+    cv_servers:
+      hosts:
+        CV_{{ cookiecutter.fabric_name }}:
+          ansible_host: {{ cookiecutter.cvp_shared_ip }}
+          ansible_user: {{ cookiecutter.cvp_username }}
+          ansible_password: {{ cookiecutter.cvp_password }}
+          ansible_python_interpreter: $(which python3)
+          ansible_httpapi_host: {{ cookiecutter.cvp_shared_ip }}
+          ansible_connection: httpapi
+          ansible_httpapi_use_ssl: true
+          ansible_httpapi_validate_certs: false
+          ansible_network_os: eos
+          ansible_httpapi_port: 443
+    {{ cookiecutter.avd_repository_name | upper }}:
+      vars:
+        ansible_user: ansible_local
+        ansible_ssh_pass: ansible
+      children:
+        {{ cookiecutter.fabric_name }}:
+          children:
+            SPINES:
+              hosts:
+{% for a_switch in cookiecutter.csv.inventory -%}
+{%     if a_switch.type == 'spine' %}
+                {{ a_switch.hostname }}:
+                  ansible_host: {{ a_switch.management_ip.split('/')[0] }}
+{%     endif %}
+{%- endfor %}
+            LEAFS:
+{% for a_switch in cookiecutter.csv.inventory -%}
+{%     if a_switch.type == 'l3leaf' %}
+                {{ a_switch.hostname }}:
+                  ansible_host: {{ a_switch.management_ip.split('/')[0] }}
+{%     endif %}
+{%- endfor %}
+
+        {{ cookiecutter.fabric_name }}_TENANTS_NETWORKS:
+          children:
+            LEAFS:
+        {{ cookiecutter.fabric_name }}_SERVERS:
+          children:
+            LEAFS:

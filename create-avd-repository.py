@@ -50,32 +50,27 @@ if __name__ == "__main__":
     cookiecutter_template_directory = os.path.join(
         os.getcwd(), '.cookiecutters/avd-cookiecutter')
 
-    # load inventory
-    # inventory_list = [ row for row in read_csv_file('CSVs/inventory.csv') ]
-    inventory_list = read_csv_file('CSVs/inventory.csv')
-    # load cabling plan
-    cabling_plan_list = read_csv_file('CSVs/cabling_plan.csv')
-    # load general parameters
-    general_parameters_dict = read_yaml_file('CSVs/general_parameters.yml')
-    # load server connections
-    server_list =  read_csv_file('CSVs/servers.csv')
-    # load server port profiles
-    server_port_profile_list = read_csv_file('CSVs/server_port_profiles.csv')
-    # load tenants and vrfs
-    tenant_and_vrf_list = read_csv_file('CSVs/tenants_and_vrfs.csv')
-    # load vlans and svis
-    vlan_and_svi_list = read_csv_file('CSVs/vlans_and_svis.csv')
+    cookiecutter_json = {
+        '_jinja2_env_vars': {'lstrip_blocks': True, 'trim_blocks': True},
+        'csv': {
+            # load inventory
+            'inventory': read_csv_file('CSVs/inventory.csv'),
+            # load cabling plan
+            'cabling_plan': read_csv_file('CSVs/cabling_plan.csv'),
+            # load server connections
+            'server_list': read_csv_file('CSVs/servers.csv'),
+            # load server port profiles
+            'server_port_profiles': read_csv_file('CSVs/server_port_profiles.csv'),
+            # load tenants and vrfs
+            'tenants_vrfs': read_csv_file('CSVs/tenants_and_vrfs.csv'),
+            # load vlans and svis
+            'vlans_svis': read_csv_file('CSVs/vlans_and_svis.csv')
+        }
 
-    # start building cookiecutter.json
-    cookiecutter_json = dict()
-    # set AVD repository name
-    cookiecutter_json.update({
-        'avd_repository_name': general_parameters_dict['AVD Repository Name']
-    })
-    # set AVD fabric name
-    cookiecutter_json.update({
-        'fabric_name': general_parameters_dict['Fabric Name']
-    })
+    }
+
+    # load general parameters and update cookiecutter.json
+    cookiecutter_json.update(read_yaml_file('CSVs/general_parameters.yml'))
 
     # write cookiecutter.json
     cookiecutter_json_filename = os.path.join(

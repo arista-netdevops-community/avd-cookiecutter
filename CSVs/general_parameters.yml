@@ -1,7 +1,7 @@
 ---
 # Name of the directory where AVD repository will be located
 # There is no need to specify full path here, just directory name
-AVD Repository Name: my_lab_avd
+avd_repository_name: my_lab_avd
 # Management parameters
 # OOB management gateway address
 Management Gateway: 192.168.122.1
@@ -20,12 +20,14 @@ AAA Server Type: RADIUS
 # CVP ingest key, use empty string if key is not defined
 CVP Ingest Key: atd-lab
 # CVP cluster nodes
-CVP Shared IP: 192.168.0.5
+cvp_shared_ip: 192.168.0.5
+cvp_username: cvpadmin
+cvp_password: arista123
 CVP Nodes: [ 192.168.0.1, 192.168.0.2, 192.168.0.3 ]
 
 # Fabric Parameters
 # leaf-spine fabric name
-Fabric Name: AVD_FABRIC
+fabric_name: AVD_FABRIC
 # IP address pool for /31 p2p underlay links
 # Assign range larger then total [Spines * total potential leafs * 2]
 Underlay Network Summary: 172.31.255.0/24

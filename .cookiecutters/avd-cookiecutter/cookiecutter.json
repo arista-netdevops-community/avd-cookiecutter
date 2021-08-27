@@ -1,5 +1,293 @@
 {
+    "_jinja2_env_vars": {
+        "lstrip_blocks": true,
+        "trim_blocks": true
+    },
+    "csv": {
+        "inventory": [
+            {
+                "hostname": "spine1",
+                "type": "spine",
+                "management_ip": "192.168.122.10/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null
+            },
+            {
+                "hostname": "spine2",
+                "type": "spine",
+                "management_ip": "192.168.122.11/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null
+            },
+            {
+                "hostname": "leaf1",
+                "type": "l3leaf",
+                "management_ip": "192.168.122.12/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null
+            },
+            {
+                "hostname": "leaf2",
+                "type": "l3leaf",
+                "management_ip": "192.168.122.13/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null
+            },
+            {
+                "hostname": "leaf3",
+                "type": "l3leaf",
+                "management_ip": "192.168.122.14/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null
+            },
+            {
+                "hostname": "leaf4",
+                "type": "l3leaf",
+                "management_ip": "192.168.122.15/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null
+            }
+        ],
+        "cabling_plan": [
+            {
+                "Local Switch": "leaf1",
+                "Local Interface": "Ethernet2",
+                "Remote Switch": "spine1",
+                "Remote Interface": "Ethernet2",
+                "Notes/Comments": null
+            },
+            {
+                "Local Switch": "leaf1",
+                "Local Interface": "Ethernet3",
+                "Remote Switch": "spine2",
+                "Remote Interface": "Ethernet2",
+                "Notes/Comments": null
+            },
+            {
+                "Local Switch": "leaf2",
+                "Local Interface": "Ethernet2",
+                "Remote Switch": "spine1",
+                "Remote Interface": "Ethernet3",
+                "Notes/Comments": null
+            },
+            {
+                "Local Switch": "leaf2",
+                "Local Interface": "Ethernet3",
+                "Remote Switch": "spine2",
+                "Remote Interface": "Ethernet3",
+                "Notes/Comments": null
+            },
+            {
+                "Local Switch": "leaf3",
+                "Local Interface": "Ethernet2",
+                "Remote Switch": "spine1",
+                "Remote Interface": "Ethernet4",
+                "Notes/Comments": null
+            },
+            {
+                "Local Switch": "leaf3",
+                "Local Interface": "Ethernet3",
+                "Remote Switch": "spine2",
+                "Remote Interface": "Ethernet4",
+                "Notes/Comments": null
+            },
+            {
+                "Local Switch": "leaf4",
+                "Local Interface": "Ethernet2",
+                "Remote Switch": "spine1",
+                "Remote Interface": "Ethernet5",
+                "Notes/Comments": null
+            },
+            {
+                "Local Switch": "leaf5",
+                "Local Interface": "Ethernet3",
+                "Remote Switch": "spine2",
+                "Remote Interface": "Ethernet5",
+                "Notes/Comments": null
+            },
+            {
+                "Local Switch": "leaf1",
+                "Local Interface": "Ethernet1",
+                "Remote Switch": "leaf2",
+                "Remote Interface": "Ethernet1",
+                "Notes/Comments": "MLAG peer link"
+            },
+            {
+                "Local Switch": "leaf3",
+                "Local Interface": "Ethernet1",
+                "Remote Switch": "leaf4",
+                "Remote Interface": "Ethernet1",
+                "Notes/Comments": "MLAG peer link"
+            }
+        ],
+        "server_list": [
+            {
+                "Server Name": "host1",
+                "Description": "leaf1_to_host1",
+                "Rack Name": "pod1",
+                "Switch Hostname": "leaf1",
+                "Switch Port": "Ethernet4",
+                "Profile": "TENANT_A",
+                "Port-Channel": "active"
+            },
+            {
+                "Server Name": "host1",
+                "Description": "",
+                "Rack Name": "",
+                "Switch Hostname": "leaf1",
+                "Switch Port": "Ethernet5",
+                "Profile": "",
+                "Port-Channel": ""
+            },
+            {
+                "Server Name": "host1",
+                "Description": "",
+                "Rack Name": "",
+                "Switch Hostname": "leaf2",
+                "Switch Port": "Ethernet4",
+                "Profile": "",
+                "Port-Channel": ""
+            },
+            {
+                "Server Name": "host1",
+                "Description": "",
+                "Rack Name": "",
+                "Switch Hostname": "leaf2",
+                "Switch Port": "Ethernet5",
+                "Profile": "",
+                "Port-Channel": ""
+            },
+            {
+                "Server Name": "host2",
+                "Description": "leaf3_to_host2",
+                "Rack Name": "pod2",
+                "Switch Hostname": "leaf3",
+                "Switch Port": "Ethernet4",
+                "Profile": "TENANT_A",
+                "Port-Channel": "active"
+            },
+            {
+                "Server Name": "host2",
+                "Description": "",
+                "Rack Name": "",
+                "Switch Hostname": "leaf3",
+                "Switch Port": "Ethernet5",
+                "Profile": "",
+                "Port-Channel": ""
+            },
+            {
+                "Server Name": "host2",
+                "Description": "",
+                "Rack Name": "",
+                "Switch Hostname": "leaf4",
+                "Switch Port": "Ethernet4",
+                "Profile": "",
+                "Port-Channel": ""
+            },
+            {
+                "Server Name": "host2",
+                "Description": "",
+                "Rack Name": "",
+                "Switch Hostname": "leaf4",
+                "Switch Port": "Ethernet5",
+                "Profile": "",
+                "Port-Channel": ""
+            }
+        ],
+        "server_port_profiles": [
+            {
+                "Profile Name": "TENANT_A",
+                "Switchport Mode": "access",
+                "VLANs": "110"
+            }
+        ],
+        "tenants_vrfs": [
+            {
+                "Tenant Name": "Tenant_A",
+                "Tenant Mac VRF Base VNI": "10000",
+                "IP VRF Name": "Tenant_A_OP_Zone",
+                "IP VRF VNI": "10",
+                "VRF Diagnostic Loopback Number": "100",
+                "VRF Diagnostic Loopback IP Range": "10.255.1.0/24"
+            }
+        ],
+        "vlans_svis": [
+            {
+                "VLAN Number": "110",
+                "VLAN Name": "Tenant_A_OP_Zone_1",
+                "Filter Tags": "opzone another_tag",
+                "IP VRF": "Tenant_A_OP_Zone",
+                "IP Address Virtual/Subnet Mask": "10.1.10.1/24",
+                "MTU": "",
+                "Enabled": "true",
+                "IGMP Snooping Enabled": ""
+            },
+            {
+                "VLAN Number": "160",
+                "VLAN Name": "Tenant_A_VMOTION",
+                "Filter Tags": "vmotion",
+                "IP VRF": "",
+                "IP Address Virtual/Subnet Mask": null,
+                "MTU": null,
+                "Enabled": null,
+                "IGMP Snooping Enabled": null
+            }
+        ]
+    },
     "avd_repository_name": "my_lab_avd",
+    "Management Gateway": "192.168.122.1",
+    "DNS Servers": [
+        "8.8.8.8",
+        "192.168.122.1"
+    ],
+    "DNS Domain Name": "lab.net",
+    "NTP Servers": [
+        "216.239.35.0",
+        "216.239.35.4",
+        "216.239.35.8"
+    ],
+    "AAA Servers": [
+        "192.168.0.1"
+    ],
+    "AAA Keys": [
+        "0207165218120E"
+    ],
+    "AAA Server Type": "RADIUS",
+    "CVP Ingest Key": "atd-lab",
+    "cvp_shared_ip": "192.168.0.5",
+    "cvp_username": "cvpadmin",
+    "cvp_password": "arista123",
+    "CVP Nodes": [
+        "192.168.0.1",
+        "192.168.0.2",
+        "192.168.0.3"
+    ],
     "fabric_name": "AVD_FABRIC",
-    "test var": "test string"
+    "Underlay Network Summary": "172.31.255.0/24",
+    "Overlay Network Summary": "192.0.255.0/24",
+    "VTEP Loopback Network Summary": "192.0.254.0/24",
+    "MLAG L3 Peering Summary": "10.255.251.0/24",
+    "MLAG Peering Summary": "10.255.252.0/24",
+    "Underlay Routing Protocol": "BGP",
+    "Spine BGP ASN": 65001,
+    "L3leaf BGP AS Range": "65101-65132",
+    "BGP Peering Password, Type-7 Encrypted": "AQQvKeimxJu+uGQ/yYvv9w==",
+    "VARP Virtual Router MAC Address": "00:1c:73:00:dc:01",
+    "L3leaf STP Priority": 4096,
+    "L3leaf STP Mode": "mstp",
+    "Underlay p2p Link MTU": 1500,
+    "local_users": {
+        "ansible_local": {
+            "privilege": 15,
+            "role": "network-admin",
+            "sha512_password": "$6$Dzu11L7yp9j3nCM9$FSptxMPyIL555OMO.ldnjDXgwZmrfMYwHSr0uznE5Qoqvd9a6UdjiFcJUhGLtvXVZR1r.A/iF5aAt50hf/EK4/"
+        }
+    },
+    "Enable VXLAN Aware Bundles": true
 }
