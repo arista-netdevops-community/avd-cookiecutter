@@ -1,0 +1,2 @@
+Tenant Name,Tenant Mac VRF Base VNI,IP VRF Name,IP VRF VNI,VRF Diagnostic Loopback Number,VRF Diagnostic Loopback IP Range
+Tenant_A,10000,Tenant_A_OP_Zone,10,100,10.255.1.0/24

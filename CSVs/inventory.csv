@@ -1,4 +1,4 @@
-Hostname,Type,Management IP,Platform
+Hostname,Type,Management IP,Platform,Filter Tenants,Filter Tags
 spine1,spine,192.168.122.10/24,vEOS
 spine2,spine,192.168.122.11/24,vEOS
 leaf1,l3leaf,192.168.122.12/24,vEOS
