@@ -79,8 +79,5 @@ if __name__ == "__main__":
     with open(cookiecutter_json_filename, 'w') as cc_json_file:
         json.dump(cookiecutter_json, cc_json_file, indent=4)
 
-    print(
-        
-    )
-
+    # generate AVD project
     cookiecutter(cookiecutter_template_directory, no_input=True, overwrite_if_exists=True, output_dir=cookiecutter_output_dir)
