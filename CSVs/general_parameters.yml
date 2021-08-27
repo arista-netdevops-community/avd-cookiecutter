@@ -1,4 +1,7 @@
 ---
+# Name of the directory where AVD repository will be located
+# There is no need to specify full path here, just directory name
+AVD Repository Name: my_lab_avd
 # Management parameters
 # OOB management gateway address
 Management Gateway: 192.168.122.1

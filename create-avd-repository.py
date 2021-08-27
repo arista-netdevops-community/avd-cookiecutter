@@ -47,7 +47,18 @@ if __name__ == "__main__":
     general_parameters_dict = read_yaml_file('CSVs/general_parameters.yml')
     # load server connections
     server_list = [ row for row in read_csv_file('CSVs/servers.csv') ]
+    # load server port profiles
+    server_port_profile_list = [ row for row in read_csv_file('CSVs/server_port_profiles.csv') ]
+    # load tenants and vrfs
+    tenant_and_vrf_list = [ row for row in read_csv_file('CSVs/tenants_and_vrfs.csv') ]
+    # load vlans and svis
+    vlan_and_svi_list = [ row for row in read_csv_file('CSVs/vlans_and_svis.csv') ]
 
-    print(server_list)
+    # start building cookiecutter.json
+    cookiecutter_json = dict()
+
+    print(
+
+    )
 
     # cookiecutter(cookiecutter_template_directory, no_input=True, overwrite_if_exists=True, output_dir=cookiecutter_output_dir)
