@@ -269,7 +269,7 @@
     "cvp_shared_ip": "192.168.0.5",
     "cvp_username": "cvpadmin",
     "cvp_password": "arista123",
-    "cvp_cluster_node_list": [
+    "cvp_instance_ips": [
         "192.168.0.1",
         "192.168.0.2",
         "192.168.0.3"
@@ -320,7 +320,7 @@
         "cvp_shared_ip": "192.168.0.5",
         "cvp_username": "cvpadmin",
         "cvp_password": "arista123",
-        "cvp_cluster_node_list": [
+        "cvp_instance_ips": [
             "192.168.0.1",
             "192.168.0.2",
             "192.168.0.3"
