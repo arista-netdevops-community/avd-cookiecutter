@@ -14,6 +14,8 @@ bgp_peer_groups:
     password: {{ cookiecutter.general.bgp_peering_password }}
   EVPN_OVERLAY_PEERS:
     password: {{ cookiecutter.general.bgp_peering_password }}
+  MLAG_IPv4_UNDERLAY_PEER:
+    password: {{ cookiecutter.general.bgp_peering_password }}
 
 # Spine Switches
 spine:

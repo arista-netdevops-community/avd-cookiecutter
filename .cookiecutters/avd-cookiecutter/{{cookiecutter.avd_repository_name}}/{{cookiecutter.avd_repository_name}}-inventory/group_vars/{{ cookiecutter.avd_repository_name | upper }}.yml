@@ -1,0 +1,2 @@
+# OOB Management network default gateway.
+mgmt_gateway: {{ cookiecutter.general.management_gateway }}
