@@ -20,7 +20,7 @@ overlay_loopback_network_summary: {{ cookiecutter.general.overlay_loopback_netwo
 vtep_loopback_network_summary: {{ cookiecutter.general.vtep_loopback_network_summary }}
 
 # Enable vlan aware bundles
-vxlan_vlan_aware_bundles: {{ vxlan_vlan_aware_bundles }}
+vxlan_vlan_aware_bundles: {{ cookiecutter.general.vxlan_vlan_aware_bundles }}
 
 # bgp peer groups passwords
 bgp_peer_groups:
