@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.183.0/containers/python-3
+{
+	"name": "AVD",
+	"image": "avdteam/avd-all-in-one:latest",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+        "python.testing.pytestPath": "/root/.local/bin/pytest",
+
+		"python.pythonPath": "/usr/local/bin/python",
+		"python.languageServer": "Pylance",
+		"python.linting.enabled": true,
+		"python.linting.pylintEnabled": true,
+		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+		"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+		"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+		"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+		"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+		"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+		"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+		"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-python.python",
+		"vscoss.vscode-ansible",
+		"timonwong.ansible-autocomplete",
+		"codezombiech.gitignore",
+		"tuxtina.json2yaml",
+		"jebbs.markdown-extended",
+		"donjayamanne.python-extension-pack",
+		"njpwerner.autodocstring",
+		"quicktype.quicktype",
+		"jack89ita.copy-filename",
+		"mhutchie.git-graph",
+		"eamodio.gitlens",
+		"yzhang.markdown-all-in-one",
+		"davidanson.vscode-markdownlint",
+		"christian-kohler.path-intellisense",
+		"ms-python.vscode-pylance",
+		"tht13.python"
+   ],
+   "containerEnv": {
+	   "ANSIBLE_CONFIG": "./ansible.cfg"
+   },
+
+	// connect as AVD user
+	"remoteUser": "avd"
+}
