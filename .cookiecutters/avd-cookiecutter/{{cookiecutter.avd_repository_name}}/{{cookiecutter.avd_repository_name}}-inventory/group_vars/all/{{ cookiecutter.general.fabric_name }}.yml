@@ -5,20 +5,6 @@ fabric_name: {{ cookiecutter.general.fabric_name }}
 
 underlay_routing_protocol: BGP
 
-# Point to Point Network Summary range, assigned as /31 for each
-# uplink interfaces
-# Assign range larger then total [Spines * total potential leafs * 2]
-underlay_p2p_network_summary: {{ cookiecutter.general.underlay_p2p_network_summary }}
-
-# IP address range for evpn loopback for all switches in fabric,
-# assigned as /32s
-# Assign range larger then total Spines + total leafs switches
-overlay_loopback_network_summary: {{ cookiecutter.general.overlay_loopback_network_summary }}
-
-# VTEP VXLAN Tunnel source loopback IP for leaf switches, assigned in /32s
-# Assign range larger then total leaf switches
-vtep_loopback_network_summary: {{ cookiecutter.general.vtep_loopback_network_summary }}
-
 # Enable vlan aware bundles
 vxlan_vlan_aware_bundles: {{ cookiecutter.general.vxlan_vlan_aware_bundles }}
 
@@ -31,15 +17,20 @@ bgp_peer_groups:
 
 # Spine Switches
 spine:
-  bgp_as: {{ cookiecutter.general.spine_bgp_asn }}
-  # defines the range of acceptable remote ASNs from leaf switches
-  leaf_as_range: {{ cookiecutter.general.leaf_as_range }}
+  defaults:
+    # IP address range for /32 EVPN loopbacks on spines
+    # Assign range larger then total spines
+    loopback_ipv4_pool: {{ cookiecutter.general.spine_loopback_ipv4_pool }}
   nodes:
 {%- for spine in cookiecutter.fabric.spine_list %}
     {{ spine.hostname }}:
       id: {{ spine.id }}
       mgmt_ip: {{ spine.management_ip }}
       platform: {{ spine.platform }}
+      bgp_as: {{ cookiecutter.general.spine_bgp_asn }}
+{%-     if spine.mac_address is defined %}
+      mac_address: '{{ spine.mac_address }}'
+{%-     endif %}
 {%- endfor %}
 
 # Leaf switch groups
@@ -48,6 +39,17 @@ spine:
 
 l3leaf:
   defaults:
+    # IP address range for /32 EVPN loopbacks on leafs
+    # assign range larger then total leafs
+    loopback_ipv4_pool: {{ cookiecutter.general.leaf_loopback_ipv4_pool }}
+    vtep_loopback_ipv4_pool: {{ cookiecutter.general.l3leaf_vtep_loopback_ipv4_pool }}
+    # adress pool for p2p underlay /31 links between l3leafs and spines
+    # assign range larger then total [Spines * total potential leafs * 2]
+    uplink_ipv4_pool: {{ cookiecutter.general.l3leaf_underlay_uplink_ipv4_pool }}
+    # address pool for MLAG peering
+    mlag_peer_ipv4_pool: {{ cookiecutter.general.mlag_peer_ipv4_pool }}
+    # address pool for L3 peering over MLAG peer-link
+    mlag_peer_l3_ipv4_pool: {{ cookiecutter.general.mlag_peer_l3_ipv4_pool }}
     # virtual router mac for VNIs assigned to Leaf switches
     # format: xx:xx:xx:xx:xx:xx
     virtual_router_mac_address: {{ cookiecutter.general.virtual_router_mac_address }}
@@ -63,9 +65,12 @@ l3leaf:
           id: {{ leaf.id }}
           mgmt_ip: {{ leaf.management_ip }}
           platform: {{ leaf.platform }}
-          spines: {{ leaf.spines }}
-          uplink_to_spine_interfaces: {{ leaf.uplink_to_spine_interfaces }}
-          spine_interfaces: {{ leaf.spine_interfaces }}
+          uplink_switches: {{ leaf.spines }}
+          uplink_interfaces: {{ leaf.uplink_to_spine_interfaces }}
+          uplink_switch_interfaces: {{ leaf.spine_interfaces }}
+{%-         if leaf.mac_address is defined %}
+          mac_address: '{{ leaf.mac_address }}'
+{%-         endif %}
 {%-     endfor %}
 {%- endfor %}
 
