@@ -1,2 +1,14 @@
+---
 # OOB Management network default gateway.
 mgmt_gateway: {{ cookiecutter.general.management_gateway }}
+
+# local users
+{%- if cookiecutter.general.local_users is defined %}
+local_users:
+{%-     for local_user_name, local_user_data in cookiecutter.general.local_users.items() %}
+  {{ local_user_name }}:
+    privilege: {{ local_user_data.privilege }}
+    role: {{ local_user_data.role }}
+    sha512_password: "{{ local_user_data.sha512_password }}"
+{%-     endfor %}
+{%- endif %}
