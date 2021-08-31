@@ -105,7 +105,7 @@
                 "notes_and_comments": null
             },
             {
-                "local_switch": "leaf5",
+                "local_switch": "leaf4",
                 "local_interface": "Ethernet3",
                 "remote_switch": "spine2",
                 "remote_interface": "Ethernet5",
@@ -341,5 +341,211 @@
             }
         },
         "vxlan_vlan_aware_bundles": true
+    },
+    "fabric": {
+        "spine_list": [
+            {
+                "hostname": "spine1",
+                "type": "spine",
+                "management_ip": "192.168.122.10/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null,
+                "id": 1
+            },
+            {
+                "hostname": "spine2",
+                "type": "spine",
+                "management_ip": "192.168.122.11/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null,
+                "id": 2
+            }
+        ],
+        "l3leaf_list": [
+            {
+                "hostname": "leaf1",
+                "type": "l3leaf",
+                "management_ip": "192.168.122.12/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null,
+                "id": 1,
+                "spines": [
+                    "spine1",
+                    "spine2"
+                ],
+                "uplink_to_spine_interfaces": [
+                    "Ethernet2",
+                    "Ethernet3"
+                ],
+                "spine_interfaces": [
+                    "Ethernet2",
+                    "Ethernet2"
+                ]
+            },
+            {
+                "hostname": "leaf2",
+                "type": "l3leaf",
+                "management_ip": "192.168.122.13/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null,
+                "id": 2,
+                "spines": [
+                    "spine1",
+                    "spine2"
+                ],
+                "uplink_to_spine_interfaces": [
+                    "Ethernet2",
+                    "Ethernet3"
+                ],
+                "spine_interfaces": [
+                    "Ethernet3",
+                    "Ethernet3"
+                ]
+            },
+            {
+                "hostname": "leaf3",
+                "type": "l3leaf",
+                "management_ip": "192.168.122.14/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null,
+                "id": 3,
+                "spines": [
+                    "spine1",
+                    "spine2"
+                ],
+                "uplink_to_spine_interfaces": [
+                    "Ethernet2",
+                    "Ethernet3"
+                ],
+                "spine_interfaces": [
+                    "Ethernet4",
+                    "Ethernet4"
+                ]
+            },
+            {
+                "hostname": "leaf4",
+                "type": "l3leaf",
+                "management_ip": "192.168.122.15/24",
+                "platform": "vEOS",
+                "filter_tenants": null,
+                "filter_tags": null,
+                "id": 4,
+                "spines": [
+                    "spine1",
+                    "spine2"
+                ],
+                "uplink_to_spine_interfaces": [
+                    "Ethernet2",
+                    "Ethernet3"
+                ],
+                "spine_interfaces": [
+                    "Ethernet5",
+                    "Ethernet5"
+                ]
+            }
+        ],
+        "pod_list": [
+            {
+                "name": "pod0",
+                "asn": 65101,
+                "leafs": [
+                    {
+                        "hostname": "leaf1",
+                        "type": "l3leaf",
+                        "management_ip": "192.168.122.12/24",
+                        "platform": "vEOS",
+                        "filter_tenants": null,
+                        "filter_tags": null,
+                        "id": 1,
+                        "spines": [
+                            "spine1",
+                            "spine2"
+                        ],
+                        "uplink_to_spine_interfaces": [
+                            "Ethernet2",
+                            "Ethernet3"
+                        ],
+                        "spine_interfaces": [
+                            "Ethernet2",
+                            "Ethernet2"
+                        ]
+                    },
+                    {
+                        "hostname": "leaf2",
+                        "type": "l3leaf",
+                        "management_ip": "192.168.122.13/24",
+                        "platform": "vEOS",
+                        "filter_tenants": null,
+                        "filter_tags": null,
+                        "id": 2,
+                        "spines": [
+                            "spine1",
+                            "spine2"
+                        ],
+                        "uplink_to_spine_interfaces": [
+                            "Ethernet2",
+                            "Ethernet3"
+                        ],
+                        "spine_interfaces": [
+                            "Ethernet3",
+                            "Ethernet3"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "pod1",
+                "asn": 65102,
+                "leafs": [
+                    {
+                        "hostname": "leaf3",
+                        "type": "l3leaf",
+                        "management_ip": "192.168.122.14/24",
+                        "platform": "vEOS",
+                        "filter_tenants": null,
+                        "filter_tags": null,
+                        "id": 3,
+                        "spines": [
+                            "spine1",
+                            "spine2"
+                        ],
+                        "uplink_to_spine_interfaces": [
+                            "Ethernet2",
+                            "Ethernet3"
+                        ],
+                        "spine_interfaces": [
+                            "Ethernet4",
+                            "Ethernet4"
+                        ]
+                    },
+                    {
+                        "hostname": "leaf4",
+                        "type": "l3leaf",
+                        "management_ip": "192.168.122.15/24",
+                        "platform": "vEOS",
+                        "filter_tenants": null,
+                        "filter_tags": null,
+                        "id": 4,
+                        "spines": [
+                            "spine1",
+                            "spine2"
+                        ],
+                        "uplink_to_spine_interfaces": [
+                            "Ethernet2",
+                            "Ethernet3"
+                        ],
+                        "spine_interfaces": [
+                            "Ethernet5",
+                            "Ethernet5"
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 }

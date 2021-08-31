@@ -23,18 +23,15 @@ all:
           children:
             SPINES:
               hosts:
-{% for a_switch in cookiecutter.csv.inventory -%}
-{%     if a_switch.type == 'spine' %}
-                {{ a_switch.hostname }}:
-                  ansible_host: {{ a_switch.management_ip.split('/')[0] }}
-{%     endif %}
+{%- for spine in cookiecutter.fabric.spine_list %}
+                {{ spine.hostname }}:
+                  ansible_host: {{ spine.management_ip.split('/')[0] }}
 {%- endfor %}
             LEAFS:
-{% for a_switch in cookiecutter.csv.inventory -%}
-{%     if a_switch.type == 'l3leaf' %}
-                {{ a_switch.hostname }}:
-                  ansible_host: {{ a_switch.management_ip.split('/')[0] }}
-{%     endif %}
+              hosts:
+{%- for leaf in cookiecutter.fabric.l3leaf_list %}
+                {{ leaf.hostname }}:
+                  ansible_host: {{ leaf.management_ip.split('/')[0] }}
 {%- endfor %}
 
         {{ cookiecutter.fabric_name }}_TENANTS_NETWORKS:

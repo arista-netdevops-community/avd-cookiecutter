@@ -10,5 +10,8 @@
         "svis",
         "vrfs",
         "vtep"
-    ]
+    ],
+    "files.associations": {
+        "*.yml": "jinja-yaml"
+    }
 }
