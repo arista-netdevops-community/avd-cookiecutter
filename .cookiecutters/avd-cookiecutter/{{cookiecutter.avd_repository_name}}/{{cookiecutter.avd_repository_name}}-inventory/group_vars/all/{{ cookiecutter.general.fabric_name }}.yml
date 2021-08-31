@@ -71,6 +71,7 @@ l3leaf:
 {%-         if leaf.mac_address is defined %}
           mac_address: '{{ leaf.mac_address }}'
 {%-         endif %}
+          mlag_interfaces: {{ leaf.mlag_interfaces }}
 {%-     endfor %}
 {%- endfor %}
 

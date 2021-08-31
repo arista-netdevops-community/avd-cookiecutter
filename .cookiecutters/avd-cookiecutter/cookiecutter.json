@@ -392,6 +392,9 @@
                 "spine_interfaces": [
                     "Ethernet2",
                     "Ethernet2"
+                ],
+                "mlag_interfaces": [
+                    "Ethernet1"
                 ]
             },
             {
@@ -414,6 +417,9 @@
                 "spine_interfaces": [
                     "Ethernet3",
                     "Ethernet3"
+                ],
+                "mlag_interfaces": [
+                    "Ethernet1"
                 ]
             },
             {
@@ -436,6 +442,9 @@
                 "spine_interfaces": [
                     "Ethernet4",
                     "Ethernet4"
+                ],
+                "mlag_interfaces": [
+                    "Ethernet1"
                 ]
             },
             {
@@ -458,6 +467,9 @@
                 "spine_interfaces": [
                     "Ethernet5",
                     "Ethernet5"
+                ],
+                "mlag_interfaces": [
+                    "Ethernet1"
                 ]
             }
         ],
@@ -486,6 +498,9 @@
                         "spine_interfaces": [
                             "Ethernet2",
                             "Ethernet2"
+                        ],
+                        "mlag_interfaces": [
+                            "Ethernet1"
                         ]
                     },
                     {
@@ -508,6 +523,9 @@
                         "spine_interfaces": [
                             "Ethernet3",
                             "Ethernet3"
+                        ],
+                        "mlag_interfaces": [
+                            "Ethernet1"
                         ]
                     }
                 ]
@@ -536,6 +554,9 @@
                         "spine_interfaces": [
                             "Ethernet4",
                             "Ethernet4"
+                        ],
+                        "mlag_interfaces": [
+                            "Ethernet1"
                         ]
                     },
                     {
@@ -558,6 +579,9 @@
                         "spine_interfaces": [
                             "Ethernet5",
                             "Ethernet5"
+                        ],
+                        "mlag_interfaces": [
+                            "Ethernet1"
                         ]
                     }
                 ]

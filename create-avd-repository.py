@@ -162,18 +162,40 @@ if __name__ == "__main__":
         }
         pod_number += 1  # increment for next cycle
         a_leaf = l3leaf_list_sorted_copy.pop(0)
-        a_pod['leafs'].append(a_leaf)
+        peer_leaf = dict()  # init peer_leaf dict
+        a_leaf_mlag_interfaces = list()  # list of mlag ports on the local switch
+        peer_leaf_mlag_interfaces = list()  # list of mlag ports on the peer switch
+
         for a_link in cookiecutter_json['csv']['cabling_plan']:
             if a_link['local_switch'] == a_leaf['hostname']:
                 for index, another_leaf in enumerate(l3leaf_list_sorted_copy):
                     if a_link['remote_switch'] == another_leaf['hostname']:
-                        a_pod['leafs'].append(
-                            l3leaf_list_sorted_copy.pop(index))
+                        a_leaf_mlag_interfaces.append(a_link['local_interface'])
+                        peer_leaf_mlag_interfaces.append(a_link['remote_interface'])
+                        peer_leaf = l3leaf_list_sorted_copy.pop(index)
+
             elif a_link['remote_switch'] == a_leaf['hostname']:
                 for index, another_leaf in enumerate(l3leaf_list_sorted_copy):
                     if a_link['local_switch'] == another_leaf['hostname']:
-                        a_pod['leafs'].append(
-                            l3leaf_list_sorted_copy.pop(index))
+                        a_leaf_mlag_interfaces.append(a_link['remote_interface'])
+                        peer_leaf_mlag_interfaces.append(a_link['local_interface'])
+                        peer_leaf = l3leaf_list_sorted_copy.pop(index)
+        
+        a_leaf.update({
+            'mlag_interfaces': a_leaf_mlag_interfaces
+        })
+        if peer_leaf:
+            peer_leaf.update({
+                'mlag_interfaces': peer_leaf_mlag_interfaces
+            })
+            a_pod.update({
+                'leafs': [a_leaf, peer_leaf]
+            })
+        else:
+            a_pod.update({
+                'leafs': [a_leaf]
+            })
+        
         cookiecutter_json['fabric']['pod_list'].append(a_pod)
 
     # write cookiecutter.json
