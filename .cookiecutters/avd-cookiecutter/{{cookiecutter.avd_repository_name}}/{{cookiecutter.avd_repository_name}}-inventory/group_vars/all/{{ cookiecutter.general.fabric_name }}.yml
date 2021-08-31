@@ -3,7 +3,7 @@
 
 fabric_name: {{ cookiecutter.general.fabric_name }}
 
-underlay_routing_protocol: {{ cookiecutter.general.underlay_routing_protocol }}
+underlay_routing_protocol: BGP
 
 # Point to Point Network Summary range, assigned as /31 for each
 # uplink interfaces
