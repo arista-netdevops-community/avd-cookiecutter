@@ -205,10 +205,12 @@ if __name__ == "__main__":
     # build servers and tenants
     cookiecutter_json.update({
         'services': {
-            'servers': list()
+            'servers': list(),
+            'tenants': list()
         }
     })
 
+    # build server data
     server_name_list = [server['server_name']
                         for server in cookiecutter_json['csv']['server_list']]
     for server_name in set(server_name_list):
@@ -241,6 +243,75 @@ if __name__ == "__main__":
             a_server['endpoint_ports'].append(a_server['description'])
 
         cookiecutter_json['services']['servers'].append(a_server)
+
+    # build tenant data
+    tenant_name_list = [entry['tenant_name']
+                        for entry in cookiecutter_json['csv']['tenants_vrfs']]
+    for tenant_name in set(tenant_name_list):
+        a_tenant = {
+            'name': tenant_name,
+            'vrfs': list(),
+            'l2vlans': list()
+        }
+        # add IP VRFs
+        for vrf_entry in cookiecutter_json['csv']['tenants_vrfs']:
+            if vrf_entry['tenant_name'] == tenant_name:
+                if vrf_entry['tenant_mac_vrf_base_vni']:
+                    a_tenant.update(
+                        {'mac_vrf_vni_base': vrf_entry['tenant_mac_vrf_base_vni']})
+                vrf = {
+                    'name': vrf_entry['ip_vrf_name'],
+                    'vrf_vni': vrf_entry['ip_vrf_vni'],
+                    'vtep_diagnostic': {
+                        'loopback': vrf_entry['vrf_diagnostic_loopback_number'],
+                        'loopback_ip_range': vrf_entry['vrf_diagnostic_loopback_ip_range']
+                    }
+                }
+                # find svis in this vrf
+                svi_list = list()
+                for vlan_entry in cookiecutter_json['csv']['vlans_svis']:
+                    if vlan_entry['tenant_name'] == tenant_name:
+                        if vlan_entry['ip_vrf'] == vrf_entry['ip_vrf_name']:
+                            svi_dict = {
+                                'vlan_number': vlan_entry['vlan_number'],
+                                'vlan_name': vlan_entry['vlan_name'],
+                                'ip_address_virtual': vlan_entry['ip_virtual_address_and_mask']
+                            }
+                            if vlan_entry['filter_tags']:
+                                svi_dict.update(
+                                    {'tags': vlan_entry['filter_tags'].split()})
+                            if vlan_entry['mtu']:
+                                svi_dict.update(
+                                    {'mtu': vlan_entry['mtu']})
+                            if vlan_entry['igmp_snooping_enabled']:
+                                svi_dict.update(
+                                    {'igmp_snooping_enabled': vlan_entry['igmp_snooping_enabled']})
+                            svi_list.append(svi_dict)
+                if svi_list:
+                    a_tenant.update({
+                        'svis': svi_list
+                    })
+                a_tenant['vrfs'].append(vrf)
+
+        # add L2-only VLANs
+        l2_vlan_list = list()
+        for vlan_entry in cookiecutter_json['csv']['vlans_svis']:
+            if vlan_entry['tenant_name'] == tenant_name:
+                if not vlan_entry['ip_vrf']:
+                    vlan_dict = {
+                        'vlan_number': vlan_entry['vlan_number'],
+                        'vlan_name': vlan_entry['vlan_name'],
+                    }
+                    if vlan_entry['filter_tags']:
+                        vlan_dict.update(
+                            {'tags': vlan_entry['filter_tags'].split()})
+                    l2_vlan_list.append(vlan_dict)
+        if l2_vlan_list:
+            a_tenant.update({
+                'l2vlans': l2_vlan_list
+            })
+
+        cookiecutter_json['services']['tenants'].append(a_tenant)
 
     # write cookiecutter.json
     cookiecutter_json_filename = os.path.join(

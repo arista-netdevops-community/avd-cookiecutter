@@ -225,23 +225,23 @@
         ],
         "vlans_svis": [
             {
+                "tenant_name": "Tenant_A",
                 "vlan_number": "110",
                 "vlan_name": "Tenant_A_OP_Zone_1",
                 "filter_tags": "opzone another_tag",
                 "ip_vrf": "Tenant_A_OP_Zone",
                 "ip_virtual_address_and_mask": "10.1.10.1/24",
                 "mtu": "",
-                "enabled": "true",
                 "igmp_snooping_enabled": ""
             },
             {
+                "tenant_name": "Tenant_A",
                 "vlan_number": "160",
                 "vlan_name": "Tenant_A_VMOTION",
                 "filter_tags": "vmotion",
                 "ip_vrf": "",
                 "ip_virtual_address_and_mask": null,
                 "mtu": null,
-                "enabled": null,
                 "igmp_snooping_enabled": null
             }
         ]
@@ -591,34 +591,6 @@
     "services": {
         "servers": [
             {
-                "name": "host1",
-                "switch_ports": [
-                    "Ethernet4",
-                    "Ethernet5",
-                    "Ethernet4",
-                    "Ethernet5"
-                ],
-                "switches": [
-                    "leaf1",
-                    "leaf1",
-                    "leaf2",
-                    "leaf2"
-                ],
-                "endpoint_ports": [
-                    "leaf1_to_host1",
-                    "leaf1_to_host1",
-                    "leaf1_to_host1",
-                    "leaf1_to_host1"
-                ],
-                "description": "leaf1_to_host1",
-                "rack": "pod1",
-                "profile": "TENANT_A",
-                "port_channel": {
-                    "mode": "active",
-                    "state": "present"
-                }
-            },
-            {
                 "name": "host2",
                 "switch_ports": [
                     "Ethernet4",
@@ -645,6 +617,70 @@
                     "mode": "active",
                     "state": "present"
                 }
+            },
+            {
+                "name": "host1",
+                "switch_ports": [
+                    "Ethernet4",
+                    "Ethernet5",
+                    "Ethernet4",
+                    "Ethernet5"
+                ],
+                "switches": [
+                    "leaf1",
+                    "leaf1",
+                    "leaf2",
+                    "leaf2"
+                ],
+                "endpoint_ports": [
+                    "leaf1_to_host1",
+                    "leaf1_to_host1",
+                    "leaf1_to_host1",
+                    "leaf1_to_host1"
+                ],
+                "description": "leaf1_to_host1",
+                "rack": "pod1",
+                "profile": "TENANT_A",
+                "port_channel": {
+                    "mode": "active",
+                    "state": "present"
+                }
+            }
+        ],
+        "tenants": [
+            {
+                "name": "Tenant_A",
+                "vrfs": [
+                    {
+                        "name": "Tenant_A_OP_Zone",
+                        "vrf_vni": "10",
+                        "vtep_diagnostic": {
+                            "loopback": "100",
+                            "loopback_ip_range": "10.255.1.0/24"
+                        }
+                    }
+                ],
+                "l2vlans": [
+                    {
+                        "vlan_number": "160",
+                        "vlan_name": "Tenant_A_VMOTION",
+                        "tags": [
+                            "vmotion"
+                        ]
+                    }
+                ],
+                "mac_vrf_vni_base": "10000",
+                "svis": [
+                    {
+                        "vlan_number": "110",
+                        "vlan_name": "Tenant_A_OP_Zone_1",
+                        "ip_address_virtual": "10.1.10.1/24",
+                        "tags": [
+                            "opzone",
+                            "another_tag"
+                        ]
+                    }
+                ]
             }
         ]
     }
