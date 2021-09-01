@@ -170,17 +170,21 @@ if __name__ == "__main__":
             if a_link['local_switch'] == a_leaf['hostname']:
                 for index, another_leaf in enumerate(l3leaf_list_sorted_copy):
                     if a_link['remote_switch'] == another_leaf['hostname']:
-                        a_leaf_mlag_interfaces.append(a_link['local_interface'])
-                        peer_leaf_mlag_interfaces.append(a_link['remote_interface'])
+                        a_leaf_mlag_interfaces.append(
+                            a_link['local_interface'])
+                        peer_leaf_mlag_interfaces.append(
+                            a_link['remote_interface'])
                         peer_leaf = l3leaf_list_sorted_copy.pop(index)
 
             elif a_link['remote_switch'] == a_leaf['hostname']:
                 for index, another_leaf in enumerate(l3leaf_list_sorted_copy):
                     if a_link['local_switch'] == another_leaf['hostname']:
-                        a_leaf_mlag_interfaces.append(a_link['remote_interface'])
-                        peer_leaf_mlag_interfaces.append(a_link['local_interface'])
+                        a_leaf_mlag_interfaces.append(
+                            a_link['remote_interface'])
+                        peer_leaf_mlag_interfaces.append(
+                            a_link['local_interface'])
                         peer_leaf = l3leaf_list_sorted_copy.pop(index)
-        
+
         a_leaf.update({
             'mlag_interfaces': a_leaf_mlag_interfaces
         })
@@ -195,8 +199,48 @@ if __name__ == "__main__":
             a_pod.update({
                 'leafs': [a_leaf]
             })
-        
+
         cookiecutter_json['fabric']['pod_list'].append(a_pod)
+
+    # build servers and tenants
+    cookiecutter_json.update({
+        'services': {
+            'servers': list()
+        }
+    })
+
+    server_name_list = [server['server_name']
+                        for server in cookiecutter_json['csv']['server_list']]
+    for server_name in set(server_name_list):
+        a_server = {
+            'name': server_name,
+            'switch_ports': list(),
+            'switches': list(),
+            'endpoint_ports': list()
+        }
+        for switchport in cookiecutter_json['csv']['server_list']:
+            if switchport['server_name'] == server_name:
+                if switchport['description']:
+                    a_server.update({'description': switchport['description']})
+                if switchport['rack_name']:
+                    a_server.update({'rack': switchport['rack_name']})
+                a_server['switches'].append(switchport['switch_hostname'])
+                a_server['switch_ports'].append(switchport['switch_port'])
+                if switchport['profile']:
+                    a_server.update({'profile': switchport['profile']})
+                if switchport['port_channel_mode']:
+                    a_server.update({
+                        'port_channel': {
+                            'mode': switchport['port_channel_mode'],
+                            'state': 'present'
+                        }
+                    })
+
+        # add description to every connection
+        for a_link in a_server['switch_ports']:
+            a_server['endpoint_ports'].append(a_server['description'])
+
+        cookiecutter_json['services']['servers'].append(a_server)
 
     # write cookiecutter.json
     cookiecutter_json_filename = os.path.join(
