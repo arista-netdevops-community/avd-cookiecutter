@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/pa/Documents/VSCode/github/avd-cookiecutter/.venv/bin/python3",
+    "python.pythonPath": ".venv/bin/python3",
     "python.languageServer": "Pylance",
     "cSpell.words": [
         "CSVs",
