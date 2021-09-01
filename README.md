@@ -38,3 +38,7 @@ Feel free to experiment with the CSV files and share your feedback.
 - Run the script. `.create-avd-repository.py` will create an inventory in the current repository. `.create-avd-repository.py -o ~` will create a dedicated repository in your home directory (assuming you are on Linux or MacOS). It's possible to specify any other directory as the destination.
 - Open AVD inventory in VSCode. If Docker is installed on your machine, VSCode will build a devcontainer and you are ready to go.
 - It is recommended to `git init` the AVD inventory.
+
+## Caveats
+
+- Windows machines have path length limit. To avoid breaking git cone for AVD cookiecutter, cookiecutter directory names were shortened.

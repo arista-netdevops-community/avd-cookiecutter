@@ -73,9 +73,18 @@ if __name__ == "__main__":
     }
 
     # load general parameters and update cookiecutter.json
-    cookiecutter_json.update(read_yaml_file('CSVs/general_parameters.yml'))
     cookiecutter_json.update({
         'general': read_yaml_file('CSVs/general_parameters.yml')
+    })
+
+    # shortening cookiecutter filenames to avoid windows path length limit
+    cookiecutter_json.update({
+        'repository_name': cookiecutter_json['general']['avd_repository_name'],
+        'fabric_name': cookiecutter_json['general']['fabric_name'],
+        'inventory_name': f"{cookiecutter_json['general']['avd_repository_name']}-inventory",
+        'all_switches_group': cookiecutter_json['general']['avd_repository_name'].upper(),
+        'server_group_name': f"{cookiecutter_json['general']['fabric_name']}_SERVERS",
+        'tenants_group_name': f"{cookiecutter_json['general']['fabric_name']}_TENANTS"
     })
 
     # build fabric variables
