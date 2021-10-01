@@ -39,6 +39,10 @@ Feel free to experiment with the CSV files and share your feedback.
 - Open AVD inventory in VSCode. If Docker is installed on your machine, VSCode will build a devcontainer and you are ready to go.
 - It is recommended to `git init` the AVD inventory.
 
+> NOTE: If devcontainer is not starting automatically, for example, when using Remote-SSH, you can start it manually:
+> `docker run --rm -it --mount type=bind,source="$(pwd)",target=/home/avd/projects avdteam/avd-all-in-one:latest`
+> Check [avd-all-in-one container documents](https://github.com/arista-netdevops-community/avd-all-in-one-container) for additional details if you have issues.
+
 ## Caveats
 
 - Windows machines have path length limit. To avoid breaking git cone for AVD cookiecutter, cookiecutter directory names were shortened.

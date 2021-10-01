@@ -2,14 +2,16 @@
     "python.pythonPath": ".venv/bin/python3",
     "python.languageServer": "Pylance",
     "cSpell.words": [
-        "CSVs",
-        "VXLAN",
+        "avdteam",
         "cookiecutter",
+        "CSVs",
+        "devcontainer",
         "loopback",
         "mgmt",
         "svis",
         "vrfs",
-        "vtep"
+        "vtep",
+        "VXLAN"
     ],
     "files.associations": {
         "*.yml": "jinja-yaml"
