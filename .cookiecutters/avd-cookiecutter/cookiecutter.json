@@ -58,6 +58,15 @@
                 "mac_address": "0c:1d:c0:1d:62:06",
                 "filter_tenants": null,
                 "filter_tags": null
+            },
+            {
+                "hostname": "spine3",
+                "type": "spine",
+                "management_ip": "192.168.122.15/24",
+                "platform": "vEOS",
+                "mac_address": "0c:1d:c0:1d:62:07",
+                "filter_tenants": null,
+                "filter_tags": null
             }
         ],
         "cabling_plan": [
@@ -130,6 +139,27 @@
                 "remote_switch": "leaf4",
                 "remote_interface": "Ethernet1",
                 "notes_and_comments": "MLAG peer link"
+            },
+            {
+                "local_switch": "leaf1",
+                "local_interface": "Ethernet4",
+                "remote_switch": "spine3",
+                "remote_interface": "Ethernet6",
+                "notes_and_comments": null
+            },
+            {
+                "local_switch": "leaf2",
+                "local_interface": "Ethernet4",
+                "remote_switch": "spine3",
+                "remote_interface": "Ethernet7",
+                "notes_and_comments": null
+            },
+            {
+                "local_switch": "leaf3",
+                "local_interface": "Ethernet4",
+                "remote_switch": "spine3",
+                "remote_interface": "Ethernet8",
+                "notes_and_comments": null
             }
         ],
         "server_list": [
@@ -325,6 +355,16 @@
                 "filter_tenants": null,
                 "filter_tags": null,
                 "id": 2
+            },
+            {
+                "hostname": "spine3",
+                "type": "spine",
+                "management_ip": "192.168.122.15/24",
+                "platform": "vEOS",
+                "mac_address": "0c:1d:c0:1d:62:07",
+                "filter_tenants": null,
+                "filter_tags": null,
+                "id": 3
             }
         ],
         "l3leaf_list": [
@@ -339,15 +379,18 @@
                 "id": 1,
                 "spines": [
                     "spine1",
-                    "spine2"
+                    "spine2",
+                    "spine3"
                 ],
                 "uplink_to_spine_interfaces": [
                     "Ethernet2",
-                    "Ethernet3"
+                    "Ethernet3",
+                    "Ethernet4"
                 ],
                 "spine_interfaces": [
                     "Ethernet2",
-                    "Ethernet2"
+                    "Ethernet2",
+                    "Ethernet6"
                 ],
                 "mlag_interfaces": [
                     "Ethernet1"
@@ -364,15 +407,18 @@
                 "id": 2,
                 "spines": [
                     "spine1",
-                    "spine2"
+                    "spine2",
+                    "spine3"
                 ],
                 "uplink_to_spine_interfaces": [
                     "Ethernet2",
-                    "Ethernet3"
+                    "Ethernet3",
+                    "Ethernet4"
                 ],
                 "spine_interfaces": [
                     "Ethernet3",
-                    "Ethernet3"
+                    "Ethernet3",
+                    "Ethernet7"
                 ],
                 "mlag_interfaces": [
                     "Ethernet1"
@@ -389,15 +435,18 @@
                 "id": 3,
                 "spines": [
                     "spine1",
-                    "spine2"
+                    "spine2",
+                    "spine3"
                 ],
                 "uplink_to_spine_interfaces": [
                     "Ethernet2",
-                    "Ethernet3"
+                    "Ethernet3",
+                    "Ethernet4"
                 ],
                 "spine_interfaces": [
                     "Ethernet4",
-                    "Ethernet4"
+                    "Ethernet4",
+                    "Ethernet8"
                 ],
                 "mlag_interfaces": [
                     "Ethernet1"
@@ -445,15 +494,18 @@
                         "id": 1,
                         "spines": [
                             "spine1",
-                            "spine2"
+                            "spine2",
+                            "spine3"
                         ],
                         "uplink_to_spine_interfaces": [
                             "Ethernet2",
-                            "Ethernet3"
+                            "Ethernet3",
+                            "Ethernet4"
                         ],
                         "spine_interfaces": [
                             "Ethernet2",
-                            "Ethernet2"
+                            "Ethernet2",
+                            "Ethernet6"
                         ],
                         "mlag_interfaces": [
                             "Ethernet1"
@@ -470,15 +522,18 @@
                         "id": 2,
                         "spines": [
                             "spine1",
-                            "spine2"
+                            "spine2",
+                            "spine3"
                         ],
                         "uplink_to_spine_interfaces": [
                             "Ethernet2",
-                            "Ethernet3"
+                            "Ethernet3",
+                            "Ethernet4"
                         ],
                         "spine_interfaces": [
                             "Ethernet3",
-                            "Ethernet3"
+                            "Ethernet3",
+                            "Ethernet7"
                         ],
                         "mlag_interfaces": [
                             "Ethernet1"
@@ -501,15 +556,18 @@
                         "id": 3,
                         "spines": [
                             "spine1",
-                            "spine2"
+                            "spine2",
+                            "spine3"
                         ],
                         "uplink_to_spine_interfaces": [
                             "Ethernet2",
-                            "Ethernet3"
+                            "Ethernet3",
+                            "Ethernet4"
                         ],
                         "spine_interfaces": [
                             "Ethernet4",
-                            "Ethernet4"
+                            "Ethernet4",
+                            "Ethernet8"
                         ],
                         "mlag_interfaces": [
                             "Ethernet1"

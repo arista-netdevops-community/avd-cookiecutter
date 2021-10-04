@@ -113,6 +113,8 @@ if __name__ == "__main__":
 
             cookiecutter_json['fabric']['spine_list'].append(a_spine)
 
+    for a_switch in cookiecutter_json['csv']['inventory']:
+
         if a_switch['type'] == 'l3leaf':
             a_leaf = dict()
             # update leaf dict with known parameters
