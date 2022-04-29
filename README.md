@@ -1,9 +1,11 @@
-# avd-cookiecutter
+# WARNING: avd-cookiecutter repository is now obsolete
+> ***
+> Please check [AVD Quickstart Containerlab](https://github.com/arista-netdevops-community/avd-quickstart-containerlab) that is a newer version of this repository with additional features.
+> ***
+
+> This repository will be deleted in future.
 
 AVD Cookiecutter project helps to build AVD inventory quickly by building all required variables from simple CSV files.
-
-> WARNING: The project is in early development phase (and may stay in this phase for quite some time =)).
-> Therefore it can crash if input is incorrect and does not support all possible AVD features.
 
 ## Required Input
 
